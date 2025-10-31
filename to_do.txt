@@ -1,0 +1,31 @@
+--- IDEA ---
+
+1. generate a simple fantasy map with just hexagons: each hexagon is a province. 
+
+2. each province has a certain level of "knowing about you", "liking you" or "not liking you" 
+
+3. you are a newborn god. three random virtues / vices / concepts pop up. you choose one to be your starting, what are you a god of. 
+
+4. your goal is to level up your godhood. you do that by doing things associated with your chosen "what are you the god of". 
+as you level up, you will get 3 more random virtues / vices / concepts and can choose on emore. 
+so eventually you can be "god of X, Y and Z." not every virtue will be equally easy to level with but that's the idea. 
+it's not meant to be balanced. it's meant to be a story. it's a single player game. 
+
+5. you level up by recruiting champions (randomly generated characters). 
+you click on a province and can get a number and quality of recruits based on how liked/known you are in the province
+(if you're unknown and/or unliked, you'll get shitty recruits). 
+then choose one. then send them on "divine tasks" to provinces. 
+these "divine tasks" can be doing good things or doing bad things to the province. 
+random results based on champion personalities and skills. 
+
+6. you have to progress the time as you look at the map. 
+"divine tasks" take a certain number of turns. random events may happen as you progress - both concerning your champions and random provinces.
+
+7. some kind of currency to manage - use it to roll for recruits, send for missions, etc. 
+
+so, what I want to do is kind of like procedurally generated fantasy goofy crusader kings dwarf fortress.
+
+--- TO DOs ---
+
+[v] create a hex grid
+[v] randomly generated grids
