@@ -1,12 +1,12 @@
 import './App.css';
-import HexGrid from './components/HexComponent';
+import HexMap from './components/HexMap';
 
 function App() {
   return (
     <>
-      <h1>Vite - React</h1>
+      <h1>Fantasy Divinity Simulator</h1>
       <div>
-        <HexGrid />
+        <HexMap />
       </div>
     </>
   );
