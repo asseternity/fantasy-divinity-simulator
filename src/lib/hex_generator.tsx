@@ -2,6 +2,7 @@ import { generateFullName } from './name_string_generator';
 import { pickRandomFromArray } from './json_pickers';
 import geographyTypes from '../data/city/geographyTypes.json';
 import { TileComponents } from '../components/tiles';
+import type { TileClickHandler } from './click_event';
 import type { BaseTileProps } from '../components/tiles/BaseTileProps';
 
 function pickRandomTile<T>(arr: T[]): T {
@@ -21,7 +22,7 @@ interface MapTile {
 
 export default async function generateRandomHexMap(
   radius: number,
-  onTileClick: (name: string, description: string) => void
+  onTileClick: TileClickHandler
 ): Promise<MapTile[]> {
   const tiles: MapTile[] = [];
   let id = 0;

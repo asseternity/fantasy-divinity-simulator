@@ -1,3 +1,4 @@
+import type { TileClickHandler } from '../lib/click_event';
 import { useState, useEffect } from 'react';
 import { HexGrid, Layout } from 'react-hexgrid';
 import generateRandomHexMap from '../lib/hex_generator';
@@ -7,7 +8,7 @@ export default function HexMap() {
   const [title, setTitle] = useState('Click a tile');
   const [description, setDescription] = useState('');
 
-  const setInfo = (given_title: string, given_description: string) => {
+  const setInfo: TileClickHandler = (given_title, given_description) => {
     setTitle(given_title);
     setDescription(given_description);
   };

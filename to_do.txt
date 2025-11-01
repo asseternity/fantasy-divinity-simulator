@@ -30,8 +30,14 @@ so, what I want to do is kind of like procedurally generated fantasy goofy crusa
 [v] create a hex grid
 [v] randomly generated grids
 [v] clickable effects on tiles
-[_] make geography type names dependent on tile types
 [_] Tile metadata - attach province stats (favor, awareness, resources, population) to each tile
+[_] make geography type names dependent on tile types
+[_] color tiles based on the metadata
+[_] turns, progression of time
+[_] interactions with provinces
+[_] random events
+[_] god mechanics
+[_] hiring 1 out of 3 random champions 
 [_] ...
 [_] at the end of a run -> give a summary on how the run went:
 - what was your deity of, your resource counts, most difficult missions, top champions

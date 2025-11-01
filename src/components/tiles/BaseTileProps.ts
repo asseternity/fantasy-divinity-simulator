@@ -1,3 +1,5 @@
+import type { TileClickHandler } from '../../lib/click_event';
+
 export interface BaseTileProps {
   q: number;
   r: number;
@@ -5,5 +7,5 @@ export interface BaseTileProps {
   name: string;
   image?: string;
   fontSize?: number;
-  onClick: (name: string, descrtiption: string) => void;
+  onClick: TileClickHandler;
 }
