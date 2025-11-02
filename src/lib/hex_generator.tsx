@@ -1,30 +1,38 @@
 import { generateFullName } from './name_string_generator';
 import { pickRandomFromArray } from './json_pickers';
 import geographyTypes from '../data/city/geographyTypes.json';
-import { TileComponents } from '../components/tiles';
+import {
+  CastleTile,
+  EmptyTile,
+  ForestTile,
+  MountainTile,
+  TempleTile,
+  TileComponents,
+} from '../components/tiles';
 import type { TileClickHandler } from './click_event';
-import type { BaseTileProps } from '../components/tiles/BaseTileProps';
+import type { TileDOM } from '../components/tiles/TileDOM';
 
 function pickRandomTile<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-// BaseTileProps = what you pass into a tile when rendering it, SO: **ONLY THINGS THAT WILL SHOW UP ON THE TILE IMAGE**
-// MapTile = what you store in your map state, SO: **METADATA**
-interface MapTile {
+// TileDOM = what you pass into a tile when rendering it, SO: **ONLY THINGS THAT WILL SHOW UP ON THE TILE IMAGE**
+// TileMetadata = what you store in your map state, SO: **METADATA**
+interface TileMetadata {
   id: number;
-  Tile: React.FC<BaseTileProps>;
+  Tile: React.FC<TileDOM>;
   coords: { q: number; r: number; s: number };
   name: string;
   description: string;
+  geography: string;
   onClick: (name: string, description: string) => void;
 }
 
 export default async function generateRandomHexMap(
   radius: number,
   onTileClick: TileClickHandler
-): Promise<MapTile[]> {
-  const tiles: MapTile[] = [];
+): Promise<TileMetadata[]> {
+  const tiles: TileMetadata[] = [];
   let id = 0;
 
   for (let q = -radius; q <= radius; q++) {
@@ -33,10 +41,30 @@ export default async function generateRandomHexMap(
       if (Math.abs(s) <= radius) {
         const randomFullName = await generateFullName();
         const firstName = randomFullName.split(' ')[0];
-        const geography = pickRandomFromArray(geographyTypes);
-        const finalName = `${firstName} ${geography}`;
+        const geographyName = pickRandomFromArray(geographyTypes);
+        const finalName = `${firstName} ${geographyName}`;
+
+        const description = 'Description!';
+
         const Tile = pickRandomTile(TileComponents);
-        const description = 'Something!';
+        let geography = 'Geography!';
+        switch (Tile) {
+          case CastleTile:
+            geography = 'castle';
+            break;
+          case TempleTile:
+            geography = 'temple';
+            break;
+          case ForestTile:
+            geography = 'forest';
+            break;
+          case MountainTile:
+            geography = 'mountain';
+            break;
+          default:
+            geography = 'plains';
+            break;
+        }
 
         tiles.push({
           id: id++,
@@ -44,6 +72,7 @@ export default async function generateRandomHexMap(
           coords: { q, r, s },
           name: finalName,
           description: description,
+          geography: geography,
           onClick: onTileClick,
         });
       }

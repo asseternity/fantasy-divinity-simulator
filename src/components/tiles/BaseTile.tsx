@@ -1,6 +1,6 @@
 import { Hexagon } from 'react-hexgrid';
 import WrappedText from '../../lib/word_wrapper';
-import type { BaseTileProps } from './BaseTileProps';
+import type { TileDOM } from './TileDOM';
 
 export default function BaseTile({
   q,
@@ -10,7 +10,7 @@ export default function BaseTile({
   image,
   fontSize = 2,
   onClick,
-}: BaseTileProps) {
+}: TileDOM) {
   return (
     <Hexagon q={q} r={r} s={s} onClick={() => onClick(name, name)}>
       {image && <image href={image} width="8" height="8" x="-4" y="-1" />}
