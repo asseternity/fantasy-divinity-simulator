@@ -1,9 +1,8 @@
+// utils
 import { generateFullName } from './name_string_generator';
 import { pickRandomFromArray } from './json_pickers';
-import geographyTypes from '../data/city/geographyTypes.json';
 import {
   CastleTile,
-  EmptyTile,
   ForestTile,
   MountainTile,
   TempleTile,
@@ -11,6 +10,14 @@ import {
 } from '../components/tiles';
 import type { TileClickHandler } from './click_event';
 import type { TileDOM } from '../components/tiles/TileDOM';
+
+// data
+import geographyTypes from '../data/city/geographyTypes.json';
+import castles from '../data/specificGeographies/castle.json';
+import forest from '../data/specificGeographies/forest.json';
+import mountain from '../data/specificGeographies/mountain.json';
+import plains from '../data/specificGeographies/plains.json';
+import temple from '../data/specificGeographies/temple.json';
 
 function pickRandomTile<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -41,30 +48,35 @@ export default async function generateRandomHexMap(
       if (Math.abs(s) <= radius) {
         const randomFullName = await generateFullName();
         const firstName = randomFullName.split(' ')[0];
-        const geographyName = pickRandomFromArray(geographyTypes);
-        const finalName = `${firstName} ${geographyName}`;
-
-        const description = 'Description!';
+        let geographyName = pickRandomFromArray(geographyTypes);
 
         const Tile = pickRandomTile(TileComponents);
         let geography = 'Geography!';
         switch (Tile) {
           case CastleTile:
             geography = 'castle';
+            geographyName = pickRandomFromArray(castles);
             break;
           case TempleTile:
             geography = 'temple';
+            geographyName = pickRandomFromArray(temple);
             break;
           case ForestTile:
             geography = 'forest';
+            geographyName = pickRandomFromArray(forest);
             break;
           case MountainTile:
             geography = 'mountain';
+            geographyName = pickRandomFromArray(mountain);
             break;
           default:
             geography = 'plains';
+            geographyName = pickRandomFromArray(plains);
             break;
         }
+
+        const finalName = `${firstName} ${geographyName}`;
+        const description = 'Description!';
 
         tiles.push({
           id: id++,

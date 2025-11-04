@@ -32,7 +32,7 @@ so, what I want to do is kind of like procedurally generated fantasy goofy crusa
 [v] clickable effects on tiles
 [v] rename BaseTileProps as TileDOM and TileData as TileMetadata
 [v] add the tile's geography as metadata on the tile
-[_] make geography type names dependent on tile types
+[v] make geography type names dependent on tile types
 [_] Tile metadata - attach province stats (favor, awareness, resources, population) to each tile
 [_] color tiles based on the metadata
 [_] turns, progression of time
