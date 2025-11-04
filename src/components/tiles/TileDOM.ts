@@ -7,5 +7,6 @@ export interface TileDOM {
   name: string;
   image?: string;
   fontSize?: number;
+  fillColor?: string;
   onClick: TileClickHandler;
 }

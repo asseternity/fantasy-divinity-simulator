@@ -32,6 +32,11 @@ interface TileMetadata {
   name: string;
   description: string;
   geography: string;
+  favor: number;
+  awareness: number;
+  resources: number;
+  population: number;
+  fillColor: string;
   onClick: (name: string, description: string) => void;
 }
 
@@ -50,29 +55,49 @@ export default async function generateRandomHexMap(
         const firstName = randomFullName.split(' ')[0];
         let geographyName = pickRandomFromArray(geographyTypes);
 
+        let favor: number = 0;
+        let awareness: number = 0;
+        let resources: number = 0;
+        let population: number = 0;
+
         const Tile = pickRandomTile(TileComponents);
         let geography = 'Geography!';
         switch (Tile) {
           case CastleTile:
             geography = 'castle';
+            population = Math.floor(Math.random() * 10000) + 1;
             geographyName = pickRandomFromArray(castles);
             break;
           case TempleTile:
             geography = 'temple';
+            population = Math.floor(Math.random() * 10000) + 1;
             geographyName = pickRandomFromArray(temple);
             break;
           case ForestTile:
             geography = 'forest';
+            population = Math.floor(Math.random() * 500) + 1;
             geographyName = pickRandomFromArray(forest);
             break;
           case MountainTile:
             geography = 'mountain';
+            population = Math.floor(Math.random() * 500) + 1;
             geographyName = pickRandomFromArray(mountain);
             break;
           default:
             geography = 'plains';
+            population = Math.floor(Math.random() * 500) + 1;
             geographyName = pickRandomFromArray(plains);
             break;
+        }
+
+        let fillColor = '#88cc88';
+
+        if (population > 5000) {
+          fillColor = '#056608';
+        } else if (population > 1000) {
+          fillColor = '#2e8857';
+        } else {
+          fillColor = '#88cc88';
         }
 
         const finalName = `${firstName} ${geographyName}`;
@@ -85,6 +110,11 @@ export default async function generateRandomHexMap(
           name: finalName,
           description: description,
           geography: geography,
+          favor: favor,
+          awareness: awareness,
+          resources: resources,
+          population: population,
+          fillColor: fillColor,
           onClick: onTileClick,
         });
       }

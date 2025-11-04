@@ -33,14 +33,32 @@ export default function HexMap() {
           spacing={1.1}
           origin={{ x: 0, y: 0 }}
         >
-          {mapTiles.map(({ id, Tile, coords, name, description, onClick }) => (
-            <Tile
-              key={id}
-              {...coords}
-              name={name}
-              onClick={() => onClick(name, description)}
-            />
-          ))}
+          {mapTiles.map(
+            ({
+              id,
+              Tile,
+              coords,
+              name,
+              description,
+              favor,
+              awareness,
+              resources,
+              population,
+              fillColor,
+              onClick,
+            }) => {
+              let all_data = `Favor: ${favor.toString()} | Awareness: ${awareness.toString()} | Resources: ${resources.toString()} | Population: ${population.toString()}`;
+              return (
+                <Tile
+                  key={id}
+                  {...coords}
+                  name={name}
+                  fillColor={fillColor}
+                  onClick={() => onClick(name, all_data)}
+                />
+              );
+            }
+          )}
         </Layout>
       </HexGrid>
     </div>

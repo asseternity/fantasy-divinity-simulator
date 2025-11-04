@@ -33,8 +33,9 @@ so, what I want to do is kind of like procedurally generated fantasy goofy crusa
 [v] rename BaseTileProps as TileDOM and TileData as TileMetadata
 [v] add the tile's geography as metadata on the tile
 [v] make geography type names dependent on tile types
-[_] Tile metadata - attach province stats (favor, awareness, resources, population) to each tile
-[_] color tiles based on the metadata
+[v] Tile metadata - attach province stats (favor, awareness, resources, population) to each tile
+[v] show metadata
+[v] color tiles based on the metadata
 [_] turns, progression of time
 [_] interactions with provinces
 [_] adapt random characters, cities, provinces to TS, BUT instead of just a string, save the NUMBERS as METADATA
