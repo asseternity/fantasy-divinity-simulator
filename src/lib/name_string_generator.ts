@@ -1,9 +1,9 @@
+import suffixes from '../data/suffixes.json';
+import { pickRandomFromArray } from './json_pickers';
+
 export async function generateFullName(): Promise<string> {
   const consonants = 'bcdfghjklmnpqrstvwxyz';
   const vowels = 'aeiou';
-
-  // Load suffixes from a text file in /public/data/suffixes.txt
-  const suffixes = await loadSuffixes('/data/suffixes.txt');
 
   // Helper: generate alternating consonant-vowel string
   function generateRandomString(length: number): string {
@@ -26,26 +26,8 @@ export async function generateFullName(): Promise<string> {
   // Surname: 3–5 letters + random suffix
   const surnameBaseLength = Math.floor(Math.random() * (5 - 3 + 1)) + 3;
   const surnameBase = generateRandomString(surnameBaseLength);
-  const surnameSuffix =
-    suffixes[Math.floor(Math.random() * suffixes.length)] ?? '';
+  const surnameSuffix = pickRandomFromArray(suffixes);
   const surname = surnameBase + surnameSuffix;
 
   return `${firstName} ${surname}`;
-}
-
-// Helper: load suffixes from public/data/suffixes.txt
-async function loadSuffixes(path: string): Promise<string[]> {
-  try {
-    const response = await fetch(path);
-    if (!response.ok) throw new Error('Failed to load suffixes');
-    const text = await response.text();
-    return text
-      .split(/\r?\n/)
-      .map((line) => line.trim())
-      .filter((line) => line.length > 0);
-  } catch (error) {
-    console.error('Error loading suffixes:', error);
-    // fallback suffixes if file missing
-    return ['son', 'ski', 'ez', 'an', 'en'];
-  }
 }

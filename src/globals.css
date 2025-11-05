@@ -1,5 +1,21 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
+
+:root,
+body,
+html,
+#root,
+main {
+  height: 100%;
+}
+
+text {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none; /* optional: avoid accidental text clicks */
+}
 
 @custom-variant dark (&:is(.dark *));
 

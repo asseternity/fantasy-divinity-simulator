@@ -36,7 +36,9 @@ so, what I want to do is kind of like procedurally generated fantasy goofy crusa
 [v] Tile metadata - attach province stats (favor, awareness, resources, population) to each tile
 [v] show metadata
 [v] color tiles based on the metadata
-[_] basic UI - frame, map in the middle, button to end turn at the bottom right
+[v] basic UI - frame, map in the middle, button to end turn at the bottom right
+[v] fix suffixes bug
+[_] responsive mobile
 [_] turns, progression of time
 [_] interactions with provinces
 [_] adapt random characters, cities, provinces to TS, BUT instead of just a string, save the NUMBERS as METADATA
