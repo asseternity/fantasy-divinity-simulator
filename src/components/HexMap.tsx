@@ -37,24 +37,26 @@ export default function HexMap() {
       </div>
       <div className="flex-1 min-h-0 border-2 flex">
         <UncontrolledReactSVGPanZoom
-          width={window.innerWidth - 10}
+          width={window.innerWidth}
           height={window.innerHeight - 170}
           background="#a3d9a5"
           tool="auto"
           detectAutoPan={false}
+          toolbarProps={{ position: 'none' }}
         >
           <HexGrid
             style={{
               fill: '#88cc88',
-              width: '100vw',
-              height: 'calc(100vh - 170px)',
             }}
           >
             <Layout
-              size={{ x: 15, y: 10 }}
+              size={{ x: 85, y: 50 }}
               flat
               spacing={1.1}
-              origin={{ x: 0, y: 0 }}
+              origin={{
+                x: window.innerWidth / 2,
+                y: (window.innerHeight - 170) / 2,
+              }}
             >
               {mapTiles.map(
                 ({

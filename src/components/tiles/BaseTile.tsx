@@ -8,7 +8,7 @@ export default function BaseTile({
   s,
   name,
   image,
-  fontSize = 2,
+  fontSize = 10,
   fillColor = '#88cc88',
   onClick,
 }: TileDOM) {
@@ -20,7 +20,7 @@ export default function BaseTile({
       onClick={() => onClick(name, name)}
       style={{ fill: fillColor }}
     >
-      {image && <image href={image} width="8" height="8" x="-4" y="-1" />}
+      {image && <image href={image} width="40" height="40" x="-20" y="0" />}
       <WrappedText text={name} fontSize={fontSize} />
     </Hexagon>
   );
