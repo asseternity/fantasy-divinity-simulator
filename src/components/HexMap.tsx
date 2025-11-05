@@ -43,6 +43,12 @@ export default function HexMap() {
           tool="auto"
           detectAutoPan={false}
           toolbarProps={{ position: 'none' }}
+          miniatureProps={{
+            position: 'none',
+            background: 'transparent',
+            width: 0,
+            height: 0,
+          }}
         >
           <HexGrid
             style={{
