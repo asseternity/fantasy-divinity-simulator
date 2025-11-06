@@ -3,6 +3,7 @@ import { generateFullName } from './name_string_generator';
 import { pickRandomFromArray } from './json_pickers';
 import {
   CastleTile,
+  EmptyTile,
   ForestTile,
   MountainTile,
   TempleTile,
@@ -19,9 +20,57 @@ import mountain from '../data/specificGeographies/mountain.json';
 import plains from '../data/specificGeographies/plains.json';
 import temple from '../data/specificGeographies/temple.json';
 
-function pickRandomTile<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
+const pickWeightedRandomTile = (
+  populationPercentage: number,
+  climateType: string
+): React.FC<TileDOM> => {
+  const populationRoll = Math.floor(Math.random() * 100) + 1;
+  if (populationRoll < populationPercentage) {
+    const settlementType = Math.floor(Math.random() * 2);
+    if (settlementType == 0) {
+      return CastleTile;
+    } else {
+      return TempleTile;
+    }
+  } else {
+    const geographyType = Math.floor(Math.random() * 100) + 1;
+    switch (climateType) {
+      case 'mountains':
+        if (geographyType <= 60) {
+          return MountainTile;
+        } else {
+          const geographyType2 = Math.floor(Math.random() * 2);
+          if (geographyType2 == 0) {
+            return ForestTile;
+          } else {
+            return EmptyTile;
+          }
+        }
+      case 'forests':
+        if (geographyType <= 60) {
+          return ForestTile;
+        } else {
+          const geographyType2 = Math.floor(Math.random() * 2);
+          if (geographyType2 == 0) {
+            return MountainTile;
+          } else {
+            return EmptyTile;
+          }
+        }
+      default:
+        if (geographyType <= 60) {
+          return EmptyTile;
+        } else {
+          const geographyType2 = Math.floor(Math.random() * 2);
+          if (geographyType2 == 0) {
+            return ForestTile;
+          } else {
+            return MountainTile;
+          }
+        }
+    }
+  }
+};
 
 // TileDOM = what you pass into a tile when rendering it, SO: **ONLY THINGS THAT WILL SHOW UP ON THE TILE IMAGE**
 // TileMetadata = what you store in your map state, SO: **METADATA**
@@ -42,10 +91,16 @@ interface TileMetadata {
 
 export default async function generateRandomHexMap(
   radius: number,
+  populationLevels: number,
+  climateType: string,
   onTileClick: TileClickHandler
 ): Promise<TileMetadata[]> {
   const tiles: TileMetadata[] = [];
   let id = 0;
+
+  // common themes to each world that inform the generation
+  // population - likelihood of castles or temples
+  // climate - if not a castle or a temple - split between plains, mountains, forests
 
   for (let q = -radius; q <= radius; q++) {
     for (let r = -radius; r <= radius; r++) {
@@ -60,7 +115,7 @@ export default async function generateRandomHexMap(
         let resources: number = 0;
         let population: number = 0;
 
-        const Tile = pickRandomTile(TileComponents);
+        const Tile = pickWeightedRandomTile(populationLevels, climateType);
         let geography = 'Geography!';
         switch (Tile) {
           case CastleTile:

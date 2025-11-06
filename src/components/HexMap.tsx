@@ -23,7 +23,7 @@ export default function HexMap() {
   };
 
   useEffect(() => {
-    generateRandomHexMap(5, setInfo).then(setMapTiles);
+    generateRandomHexMap(5, 10, 'forests', setInfo).then(setMapTiles);
   }, []);
 
   return (
