@@ -10,10 +10,21 @@ export default function HexMap() {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [turn, setTurn] = useState<number>(0);
+  const [actionUsedThisTurn, setActionUsedThisTurn] = useState<boolean>(false);
+  const [buttonsDisabled, setButtonsDisabled] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (title == '' || actionUsedThisTurn) {
+      setButtonsDisabled(true);
+    } else {
+      setButtonsDisabled(false);
+    }
+  }, [actionUsedThisTurn, mapTiles, title, turn]);
 
   const endTurn = () => {
     const currentTurn: number = turn;
     const nextTurn: number = currentTurn + 1;
+    setActionUsedThisTurn(false);
     setTurn(nextTurn);
   };
 
@@ -28,12 +39,32 @@ export default function HexMap() {
 
   return (
     <div className="min-h-dvh flex flex-col">
-      <div className="border-2 h-25 flex flex-row gap-5 items-center p-5 text-sm md:text-xl">
-        <h1>Province: {title}</h1>
+      <div className="border-2 h-25 flex flex-row gap-5 items-center justify-between text-sm md:text-xl">
+        <h1 className="pl-5">Province: {title}</h1>
         <p>|</p>
         <h3>Resources: {description}</h3>
         <p>|</p>
         <h3>Turn {turn}</h3>
+        <div className="flex flex-col">
+          <Button
+            disabled={buttonsDisabled}
+            onClick={() => setActionUsedThisTurn(true)}
+          >
+            Action 1
+          </Button>
+          <Button
+            disabled={buttonsDisabled}
+            onClick={() => setActionUsedThisTurn(true)}
+          >
+            Action 2
+          </Button>
+          <Button
+            disabled={buttonsDisabled}
+            onClick={() => setActionUsedThisTurn(true)}
+          >
+            Action 3
+          </Button>
+        </div>
       </div>
       <div className="flex-1 min-h-0 border-2 flex">
         <UncontrolledReactSVGPanZoom
