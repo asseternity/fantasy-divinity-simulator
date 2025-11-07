@@ -70,7 +70,6 @@ export default function HexMap() {
                   Tile,
                   coords,
                   name,
-                  description,
                   favor,
                   awareness,
                   resources,

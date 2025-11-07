@@ -7,7 +7,6 @@ import {
   ForestTile,
   MountainTile,
   TempleTile,
-  TileComponents,
 } from '../components/tiles';
 import type { TileClickHandler } from './click_event';
 import type { TileDOM } from '../components/tiles/TileDOM';
