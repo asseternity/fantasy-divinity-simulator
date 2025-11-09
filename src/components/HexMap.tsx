@@ -14,6 +14,30 @@ export default function HexMap() {
   const [buttonsDisabled, setButtonsDisabled] = useState<boolean>(true);
 
   useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await fetch(
+          'https://fantasy-divinity-backend-v2-production.up.railway.app/get-users',
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          setTitle(data.users[0].name);
+        }
+      } catch (err) {
+        console.error('Error during fetch: ', err);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
     if (title == '' || actionUsedThisTurn) {
       setButtonsDisabled(true);
     } else {
