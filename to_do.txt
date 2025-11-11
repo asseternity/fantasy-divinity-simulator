@@ -41,10 +41,11 @@ so, what I want to do is kind of like procedurally generated fantasy goofy crusa
 [v] responsive mobile
 [v] turns, progression of time
 [v] interactions with provinces  - once per turn, popups
-[_] adapt random characters, cities, provinces to TS, BUT instead of just a string, save the NUMBERS as METADATA
 [_] random events
+[_] adapt random characters, cities, provinces to TS, BUT instead of just a string, save the NUMBERS as METADATA
 [_] having a list of champions
 [_] hiring 1 out of 3 random champions
+[_] events with decisions
 [_] FINALLY --- make a game! god mechanics 
 [_] ...
 [_] at the end of a run -> give a summary on how the run went:

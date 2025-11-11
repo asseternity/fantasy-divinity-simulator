@@ -1,9 +1,13 @@
+// libraries
 import { UncontrolledReactSVGPanZoom } from 'react-svg-pan-zoom';
 import type { TileClickHandler } from '../lib/click_event';
 import { useState, useEffect } from 'react';
 import { HexGrid, Layout } from 'react-hexgrid';
-import generateRandomHexMap from '../lib/hex_generator';
 import { Button } from '@/components/ui/button';
+
+// components
+import generateRandomHexMap from '../lib/hex_generator';
+import EventPopup from './EventPopup';
 
 export default function HexMap() {
   const [mapTiles, setMapTiles] = useState<any[]>([]);
@@ -12,6 +16,7 @@ export default function HexMap() {
   const [turn, setTurn] = useState<number>(0);
   const [actionUsedThisTurn, setActionUsedThisTurn] = useState<boolean>(false);
   const [buttonsDisabled, setButtonsDisabled] = useState<boolean>(true);
+  const [showEventPopup, setShowEventPopup] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -38,7 +43,7 @@ export default function HexMap() {
   }, []);
 
   useEffect(() => {
-    if (title == '' || actionUsedThisTurn) {
+    if (title == '' || title == 'test' || actionUsedThisTurn) {
       setButtonsDisabled(true);
     } else {
       setButtonsDisabled(false);
@@ -46,6 +51,10 @@ export default function HexMap() {
   }, [actionUsedThisTurn, mapTiles, title, turn]);
 
   const endTurn = () => {
+    const fifty_fifty = Math.floor(Math.random() * 2);
+    if (fifty_fifty == 0) {
+      setShowEventPopup(true);
+    }
     const currentTurn: number = turn;
     const nextTurn: number = currentTurn + 1;
     setActionUsedThisTurn(false);
@@ -91,6 +100,13 @@ export default function HexMap() {
         </div>
       </div>
       <div className="flex-1 min-h-0 border-2 flex">
+        {showEventPopup && (
+          <EventPopup
+            title="Event Title"
+            text="This is where the event text is going to go."
+            callback={setShowEventPopup}
+          />
+        )}
         <UncontrolledReactSVGPanZoom
           width={window.innerWidth}
           height={window.innerHeight - 170}
